@@ -1,0 +1,85 @@
+\section{From Basic Waveforms to Musical Perception}
+
+The previous section discussed how early sound chips generated a limited set of waveforms under hardware constraints. However, these signals only become meaningful in music when they are perceived by listeners. Actually, the connection between signal generation and musical expression can be understood through three basic attributes of sound: timbre, pitch, and loudness.
+
+\subsection{Timbre: Waveform as Sound Color}
+
+Timbre mainly depends on waveform shape. Even when pitch and loudness are the same, different waveforms can still produce different sound colors. three fundamental waveform in sound chips in 1980s were associated with different musical functions:
+
+\begin{itemize}
+    \item \textbf{Square Wave.} It produces a clear and distinct tone, making it suitable for lead melodies and simple harmonies.
+    
+    \item \textbf{Sawtooth Wave.} It has a fuller and more stable sound character, so it is suitable for bass lines.
+    
+    \item \textbf{Noise Wave.} It does not have a stable pitch and is mainly used for percussion and drum-like effects.
+\end{itemize}
+
+Figure~\ref{fig:three waves} illustrates these differences in waveform shape, which form the basis of their different timbral characteristics.
+
+
+\subsection{Pitch: Frequency Determines Musical Notes}
+
+Pitch is determined by frequency: a higher frequency produces a higher note. In the twelve-tone equal temperament system, one semitone corresponds to a frequency ratio of $2^{1/12}$. This means that an interval of $n$ semitones corresponds to a frequency ratio of $(2^{1/12})^n$. Table~\ref{tab:c-major-scale} uses the C major scale as an example to illustrate this relationship.
+
+\begin{table}[h]
+\centering
+\caption{Frequencies of selected notes in the C major scale}
+\label{tab:c-major-scale}
+\begin{tabular}{cccc}
+\hline
+\textbf{Syllable Name} & \textbf{Frequency (Hz)} & \textbf{Interval from Previous Note} & \textbf{Frequency Ratio} \\
+\hline
+do  & 261.63 & --          & -- \\
+re  & 293.66 & 2 semitones & $(2^{1/12})^2$ \\
+mi  & 329.63 & 2 semitones & $(2^{1/12})^2$ \\
+fa  & 349.23 & 1 semitone  & $2^{1/12}$ \\
+sol & 392.00 & 2 semitones & $(2^{1/12})^2$ \\
+\hline
+\end{tabular}
+\end{table}
+
+As shown in Table~\ref{tab:c-major-scale}, adjacent notes differ by multiplicative rather than additive changes in frequency.
+
+\subsection{Loudness: Amplitude Controls Perceived Volume}
+
+Loudness is mainly related to amplitude. In general, a waveform with a larger amplitude produces a louder sound. 
+Figure~\ref{fig:three_amplitudes} shows three sawtooth waves with the same frequency but different amplitudes, while Table~\ref{tab:loudness-comparison-124} summarizes their relative amplitude ratios and corresponding level differences.
+
+The difference can be expressed in decibels (dB) as
+\[
+L = 20 \log_{10}\left(\frac{A_2}{A_1}\right).
+\]
+
+For amplitude ratios of $1:2:4$, each doubling corresponds to an increase of about $6.02$ dB, as shown in Figure~\ref{fig:three_amplitudes} and Table~\ref{tab:loudness-comparison-124}. This indicates that amplitude-related loudness changes are more appropriately interpreted on a logarithmic scale rather than a linear one.
+
+
+\begin{figure}[ht]
+\centering
+\subfigure[Amplitude = 0.20.\label{fig:1x}]{\includegraphics[width=0.32\linewidth]{pictures/loudness_comparison_1x.png}}
+\hfill
+\subfigure[Amplitude = 0.40.\label{fig:2x}]{\includegraphics[width=0.32\linewidth]{pictures/loudness_comparison_2x.png}}
+\hfill
+\subfigure[Amplitude = 0.80.\label{fig:4x}]{\includegraphics[width=0.32\linewidth]{pictures/loudness_comparison_4x.png}}
+\caption{Sawtooth waveforms with the same frequency and different amplitudes.}
+\label{fig:three_amplitudes}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{cccc}
+\hline
+Amplitude & Ratio to 0.20 & Level vs.\ 0.20 & Increment in dB \\
+\hline
+0.20 & 1:1 & 0.00 dB & -- \\
+0.40 & 2:1 & 6.02 dB & 6.02 dB \\
+0.80 & 4:1 & 12.04 dB & 6.02 dB \\
+\hline
+\end{tabular}
+\caption{Relative amplitude and decibel comparison for sawtooth waves with amplitudes 0.20, 0.40, and 0.80.}
+\label{tab:loudness-comparison-124}
+\end{table}
+
+
+
+
+

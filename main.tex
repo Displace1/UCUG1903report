@@ -1,0 +1,160 @@
+\documentclass[12pt]{article}
+
+
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\magenta}[1]{\textcolor{magenta}{#1}}
+%------------------------packages-----------------------------
+\usepackage{booktabs}
+\usepackage[mathscr]{eucal}
+\usepackage[cmex10]{amsmath}
+\usepackage{epsfig,epsf,psfrag}
+\usepackage{amssymb,amsthm,amsfonts,latexsym}
+\usepackage{graphicx,xcolor,url,overpic}
+\usepackage{array}%array and tabular environments
+\usepackage{verbatim}
+\usepackage{bm}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{mathrsfs}
+\usepackage{hyperref}
+\usepackage{epstopdf}
+\usepackage{subfigure}
+\usepackage{acronym}
+\usepackage{diagbox}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{graphs, positioning, quotes, shapes.geometric}
+\usepackage{thmtools, thm-restate}
+%-----------------------------------------------------
+
+
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newcommand{\openone}{\leavevmode\hbox{\small1\normalsize\kern-.33em1}}
+
+%% To produce a tilde in url
+\catcode`~=11 \def\UrlSpecials{\do\~{\kern -.15em\lower .7ex\hbox{~}\kern .04em}} \catcode`~=13
+
+\allowdisplaybreaks[4]
+
+\newcommand{\snr}{\mathsf{snr}}
+\newcommand{\inr}{\mathsf{inr}}
+
+\newcommand{\nn}{\nonumber}
+\newcommand{\cequal}{\stackrel{\mathrm{c}}{=}}
+\newcommand{\dequal}{\stackrel{\mathrm{d}}{=}}
+
+\def\tv{\mathop{\mathrm{TV}}}
+\newcommand{\unif}{{\text{Unif}}}
+\newcommand{\kl}{D_{\mathrm{kl}}}
+\newcommand{\md}{{\text{md}}}
+\newcommand{\rd}{{\mathrm{d}}}
+\newcommand{\rE}{{\text{{\tiny E}}}}
+\newcommand{\rc}{{\mathrm{c}}}
+\newcommand{\TD}{{\mathrm{TD} } }
+\newcommand{\init}{{\text{init}}}
+\newcommand{\proj}{\text{Proj}}
+\newcommand{\err}{{\epsilon}}
+\newcommand{\phic}{\iota}
+%\newcommand{\gap}{\text{Gap}}
+\newcommand{\DD}{\mathbb{D}}
+
+% Calligraphic stuff
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calJ}{\mathcal{J}}
+\newcommand{\calK}{\mathcal{K}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calZ}{\mathcal{Z}}
+
+\newcommand{\hatcalA}{\hat{\calA}}
+\newcommand{\hatcalB}{\hat{\calB}}
+\newcommand{\hatcalC}{\hat{\calC}}
+\newcommand{\hatcalD}{\hat{\calD}}
+\newcommand{\hatcalE}{\hat{\calE}}
+\newcommand{\hatcalF}{\hat{\calF}}
+\newcommand{\hatcalG}{\hat{\calG}}
+\newcommand{\hatcalH}{\hat{\calH}}
+\newcommand{\hatcalI}{\hat{\calI}}
+\newcommand{\hatcalJ}{\hat{\calJ}}
+\newcommand{\hatcalK}{\hat{\calK}}
+\newcommand{\hatcalL}{\hat{\calL}}
+\newcommand{\hatcalM}{\hat{\calM}}
+\newcommand{\hatcalN}{\hat{\calN}}
+\newcommand{\hatcalO}{\hat{\calO}}
+\newcommand{\hatcalP}{\hat{\calP}}
+\newcommand{\hatcalQ}{\hat{\calQ}}
+\newcommand{\hatcalR}{\hat{\calR}}
+\newcommand{\hatcalS}{\hat{\calS}}
+\newcommand{\hatcalT}{\hat{\calT}}
+\newcommand{\hatcalU}{\hat{\calU}}
+% \usepackage{refcheck}
+\usepackage{mathtools}
+% \mathtoolsset{showonlyrefs}
+\usepackage{bbm}
+\usepackage{svg}
+\usepackage[round]{natbib}
+\usepackage{geometry}
+\geometry{a4paper,scale=0.8}
+\usepackage{acronym}
+\acrodef{mab}[MAB]{Multi-Armed Bandit}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{requirement}{Requirement}
+
+
+\title{UCUG1903 26 Spring Project Report}
+\author{Jiongxu CHEN, Xiangqian WANG, Yiqiu LIU}
+\date{May 2026}
+
+\begin{document}
+
+\maketitle
+
+
+\input{sec/0_abstract}
+
+\input{sec/1_intro}
+
+\input{sec/Hardware Constraints in the 1980s}
+\input{sec/Three Basic Waveforms}
+
+\input{sec/Three attritubutes of sounds}
+
+\input{sec/web}
+
+\end{document}
+
