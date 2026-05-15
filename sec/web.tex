@@ -1,31 +1,47 @@
 \section{Building the Web-Based Interactive Demo}
 \label{sec:web}
 
-We built a \emph{static} site in \texttt{web/} so lecture ideas---\emph{pitch vs.\ frequency}, \emph{waveform vs.\ timbre}, and \emph{simple noise}---can be tried in the browser with no backend. The client uses HTML5, CSS, JavaScript, and the \textbf{Web Audio API}; real-time audition and offline export share one synthesis path. Staying static avoided servers, credentials, and databases yet still scales for classroom traffic once GitHub Pages hosts the assets. File boundaries (\texttt{app.js} vs.\ \texttt{audio-engine.js}) also mirrored how we split UI work from DSP during the project.
+We built a \emph{static} site in \texttt{web/} so lecture ideas---\emph{pitch vs.\ frequency}, \emph{waveform vs.\ timbre}, and \emph{simple noise}---can be tried in the browser with no backend.
+The client uses HTML5, CSS, JavaScript, and the \textbf{Web Audio API}; real-time audition and offline export share one synthesis path.
+Staying static avoided servers, credentials, and databases yet still scales for classroom traffic once GitHub Pages hosts the assets.
+File boundaries (\texttt{app.js} vs.\ \texttt{audio-engine.js}) mirrored how we split UI work from DSP during the project.
 
 \subsection{Features and Stack}
-Users edit $1$--$16$ steps: duration on a $0.2$--$1.0\,\mathrm{s}$ grid (step $0.1$), pitch on thirteen C-major solf\`{e}ge degrees from low \textit{sol} to high \textit{mi} with Hz labels, waveform (square or sawtooth), and optional noise. A piano-roll score plots time left-to-right; colors distinguish waveforms, hatched blocks mark noise, and clicking a block jumps to that step. During playback an output waveform shows the mix; a master gain slider and \textbf{Export WAV} close the listen--inspect--save loop. The score plus oscilloscope let listeners connect what they hear with one time-aligned trace they can screenshot or archive. A preset loader and \texttt{web/qr-site.png} ease demos and mobile access; the QR target is the public Pages URL below. GitHub Actions publishes \texttt{web/} as the site root from repository \url{https://github.com/Displace1/UCUG1903} (see \texttt{.github/workflows/deploy-pages.yml} and \texttt{README.md}). File roles are listed in Table~\ref{tab:web-files}.
+
+Users edit $1$--$16$ steps: duration on a $0.2$--$1.0\,\mathrm{s}$ grid (step $0.1$), pitch on thirteen C-major solf\`{e}ge degrees from low \textit{sol} to high \textit{mi} with Hz labels, waveform (square or sawtooth), and optional noise.
+A piano-roll score plots time left to right; colors distinguish waveforms, hatched blocks mark noise, and clicking a block jumps to that step.
+During playback an output waveform shows the mix; a master gain slider and \textbf{Export WAV} complete the listen--inspect--save loop.
+The score and oscilloscope connect what listeners hear with a time-aligned trace for screenshots or archives.
+A preset loader and \texttt{web/qr-site.png} simplify demos and mobile access; GitHub Actions publishes \texttt{web/} from repository \url{https://github.com/Displace1/UCUG1903} (see \texttt{.github/workflows/deploy-pages.yml} and \texttt{README.md}).
+Roles of source files are listed in Table~\ref{tab:web-files}.
 
 \begin{table}[htbp]
   \centering
-  \caption{Web source files and responsibilities}
+  \caption{Web source files and responsibilities.}
   \label{tab:web-files}
   \begin{tabular}{@{}ll@{}}
     \toprule
     Path & Role \\
     \midrule
     \texttt{web/index.html} & Structure, controls, canvases \\
-    \texttt{web/style.css}   & Layout, theme, readability \\
-    \texttt{web/app.js}      & UI state, score/wave drawing, input, engine calls \\
+    \texttt{web/style.css} & Layout, theme, readability \\
+    \texttt{web/app.js} & UI state, score/wave drawing, input, engine calls \\
     \texttt{web/audio-engine.js} & Waves, noise, play/stop, WAV render \\
-    \texttt{web/song-schema.js}  & Timeline and frequency helpers \\
+    \texttt{web/song-schema.js} & Timeline and frequency helpers \\
     \texttt{web/default-song.json} & Default / demo sequence \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 \subsection{Architecture and Core Logic}
-Presentation stays in \texttt{app.js} (DOM, canvases, state); \texttt{audio-engine.js} writes samples; \texttt{song-schema.js} fixes timing and frequency fields between them. Figure~\ref{fig:web-arch} shows data flow. Square and sawtooth are generated per step at the audio sample rate. Noise uses a console-style \textbf{15-bit LFSR} and low-pass filtering; tonal and noise buses are scaled (e.g.\ $1/\sqrt{2}$) before summing to limit clipping, as in \texttt{README.md}. Canvas hit-testing maps clicks back to form controls. Offline \texttt{AudioContext} rendering writes the same buffers as audition, wrapped as standard WAV for download, so exported audio matches the synthesized timeline aside from live buffering delay.
+
+Presentation lives in \texttt{app.js} (DOM, canvases, and state).
+The module \texttt{audio-engine.js} writes samples, and \texttt{song-schema.js} negotiates timing and frequency fields between them.
+Figure~\ref{fig:web-arch} sketches the data flow.
+Square and sawtooth are synthesized per audio-rate sample; noise follows a console-style \textbf{15-bit LFSR} with low-pass shaping.
+Tonal and noise buses are scaled (e.g.\ $1/\sqrt{2}$) before summing to limit clipping, following \texttt{README.md}.
+Canvas hit-testing maps clicks back to controls.
+Offline \texttt{AudioContext} rendering wraps the same buffers as live playback into standard WAV, so exported audio matches the synthesized timeline aside from buffering delay.
 
 \begin{figure}[htbp]
   \centering
@@ -39,9 +55,13 @@ Presentation stays in \texttt{app.js} (DOM, canvases, state); \texttt{audio-engi
     \draw[->, thick] (schema) -- (app);
     \draw[->, thick] (app) -- node[midway, below=0.15cm, font=\scriptsize, inner sep=1pt] {play / render} (audio);
   \end{tikzpicture}
-  \caption{Front-end modules and data flow (schematic).}
+  \caption{Front-end modules and data flow.}
   \label{fig:web-arch}
 \end{figure}
 
 \subsection{Deployment}
-Source code and documentation are in \url{https://github.com/Displace1/UCUG1903}. Each push triggers GitHub Actions to deploy \texttt{web/} to GitHub Pages; the public demo is \url{https://displace1.github.io/UCUG1903/}. Prefer \texttt{HTTPS} (or a local HTTP server) over \texttt{file://} for reliable audio. The bundled QR code points to the same site URL for classroom phones.
+
+Source and documentation reside at \url{https://github.com/Displace1/UCUG1903}.
+Each push triggers GitHub Actions to deploy \texttt{web/} to GitHub Pages; the public demo is \url{https://displace1.github.io/UCUG1903/}.
+Use \texttt{HTTPS} or a local HTTP server rather than \texttt{file://} for reliable audio.
+The bundled QR code targets the same URL for classroom phones.

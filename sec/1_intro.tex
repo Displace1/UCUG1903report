@@ -1,1 +1,9 @@
 \section{Introduction}
+\label{sec:intro}
+
+1980s game and home-computer audio was shaped by scarce ROM, weak integer CPUs, and simple converters, not by general-purpose sampling pipelines.
+Engineers relied on \emph{command-driven} sound chips: the CPU sends coarse parameters (frequency, level, waveform type) and the chip synthesizes audio in real time (Figure~\ref{fig:command-driven}).
+
+This report summarizes that design space and its perceptual counterpart.
+Section~\ref{sec:waveforms} reviews square, sawtooth, and LFSR-style noise---and why sine generation was rarely affordable---then Section~\ref{sec:perception} relates those signals to timbre, pitch (equal temperament), and loudness (decibels).
+Section~\ref{sec:web} describes a browser demo (Web Audio, piano-roll editing, WAV export) that echoes the same primitives without original hardware.

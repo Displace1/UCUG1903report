@@ -1,0 +1,14 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+Retrospective game audio makes a compact case study in constrained signal processing.
+Severely limited memory and arithmetic forced a decomposition of the problem---the CPU programs \emph{parameters}, while periodic dividers, accumulators, and feedback shift registers synthesize recognizable tones and noise bursts on dedicated hardware.
+Against that backdrop, sine synthesis was disproportionately costly, so composers worked with edgy spectra that were cheap to emit yet still expressive inside short loops.
+
+Connecting chip waveforms to \emph{timbre}, \emph{pitch}, and \emph{loudness} clarifies why a small toolkit could cover harmonic content, tempered scales via multiplicative frequency steps, and level changes well captured on a logarithmic (decibel) axis.
+These links also explain hallmark musical roles: square tones for melodic lines, rich saw shapes for supportive bass registers, and aperiodic noise for percussive color.
+
+Our static web synthesizer echoes the same pedagogical storyline.
+By separating timeline data, UI canvases, and the audio engine, the demo aligns software structure with lecture emphasis on oscillator models, quantization of timing and pitch choices, scaled noise mixtures, and traceable WAV export for offline inspection.
+
+Looking forward, the stack could incorporate additional wave-shaping motifs (duty-cycle variation, rudimentary envelopes) or juxtapose synthesized output with archival recordings---extensions that reuse the project's interactive loop of \emph{hear}, \emph{see}, and \emph{save}.
